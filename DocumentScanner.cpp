@@ -1,7 +1,17 @@
 #include "DocumentScanner/DocumentScanner.hpp"
 
+#include <cassert>
+
 namespace ds
 {
+    DocumentScanner::DocumentScanner(
+        const std::shared_ptr<ContoursFinder>& contoursFinder)
+    {
+        assert(contoursFinder != nullptr);
+        _contoursFinder = contoursFinder;
+    }
+
+    
     void DocumentScanner::scan(const cv::Mat& input, cv::Mat& output)
     {
         _buffers[0] = input;
