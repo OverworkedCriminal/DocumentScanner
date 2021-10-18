@@ -1,7 +1,12 @@
 #ifndef DOCUMENTSCANNER_DOCUMENT_SCANNER_HPP
 #define DOCUMENTSCANNER_DOCUMENT_SCANNER_HPP
 
+#include <vector>
+
 #include <opencv2/core/mat.hpp>
+#include "DocumentScanner/preprocessing/IPreprocessingStage.hpp"
+
+
 
 namespace ds
 {
@@ -11,8 +16,17 @@ namespace ds
      */
     class DocumentScanner
     {
-        
     private:
+
+        std::vector<IPreprocessingStage> _processingStages;
+
+        /**
+         * vector of buffers.
+         * Its size should be _processingStages.size() + 1.
+         * Element at index 0 is always replaced with input
+         * on scan() call.
+         */
+        std::vector<cv::Mat> _buffers;
 
     public:
 
