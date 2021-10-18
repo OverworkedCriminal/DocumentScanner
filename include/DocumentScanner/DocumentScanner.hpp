@@ -7,6 +7,7 @@
 #include <opencv2/core/mat.hpp>
 #include "DocumentScanner/preprocessing/IPreprocessingStage.hpp"
 #include "DocumentScanner/ContoursFinder.hpp"
+#include "DocumentScanner/corners_finding/ICornersFinder.hpp"
 
 namespace ds
 {
@@ -28,18 +29,11 @@ namespace ds
          */
         std::vector<cv::Mat> _buffers;
 
-        /**
-         * Vector containing found contours
-         * 
-         */
         std::vector<std::vector<cv::Point>> _contours;
+        std::array<cv::Point2f, 4> _corners;
 
-        /**
-         * ContoursFinder object.
-         * It can be assumed it will never be a nullptr.
-         *
-         */
         std::shared_ptr<ContoursFinder> _contoursFinder;
+        std::shared_ptr<ICornersFinder> _cornersFinder;
 
     public:
 
@@ -47,9 +41,11 @@ namespace ds
          * @brief 
          * 
          * @param contoursFinder it cannot be a nullptr
+         * @param cornersFinder it cannot be a nullptr
          */
-        DocumentScanner(const std::shared_ptr<ContoursFinder>& contoursFinder);
-        
+        DocumentScanner(const std::shared_ptr<ContoursFinder>& contoursFinder,
+                        const std::shared_ptr<ICornersFinder>& cornersFinder);
+
 
         /**
          * @brief Find document in input image and write it's warped
@@ -58,7 +54,7 @@ namespace ds
          * @param input 
          * @param output 
          */
-        void scan(const cv::Mat& input, cv::Mat& output);
+        void scan(const cv::Mat& input, cv::Mat& output, const cv::Size& outputSize);
     };    
 }
 

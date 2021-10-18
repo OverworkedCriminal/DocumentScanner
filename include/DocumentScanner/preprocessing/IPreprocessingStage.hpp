@@ -13,6 +13,7 @@ namespace ds
     class IPreprocessingStage
     {
     public:
+        virtual ~IPreprocessingStage() {}
 
         /**
          * @brief Process input image and write result into

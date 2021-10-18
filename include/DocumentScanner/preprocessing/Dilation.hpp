@@ -1,5 +1,5 @@
-#ifndef DILATION_DILATION_HPP
-#define DILATION_DILATION_HPP
+#ifndef DOCUMENTSCANNER_PREPROCESSING_DILATION_HPP
+#define DOCUMENTSCANNER_PREPROCESSING_DILATION_HPP
 
 #include "DocumentScanner/preprocessing/IPreprocessingStage.hpp"
 

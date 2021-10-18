@@ -1,5 +1,5 @@
-#ifndef EDGE_DETECTOR_CANNY_HPP
-#define EDGE_DETECTOR_CANNY_HPP
+#ifndef DOCUMENTSCANNER_PREPROCESSING_CANNY_HPP
+#define DOCUMENTSCANNER_PREPROCESSING_CANNY_HPP
 
 #include "DocumentScanner/preprocessing/IPreprocessingStage.hpp"
 

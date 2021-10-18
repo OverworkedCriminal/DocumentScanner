@@ -1,5 +1,5 @@
-#ifndef BLUR_GAUSSIAN_HPP
-#define BLUR_GAUSSIAN_HPP
+#ifndef DOCUMENTSCANNER_PREPROCESSING_GAUSSIAN_BLUR_HPP
+#define DOCUMENTSCANNER_PREPROCESSING_GAUSSIAN_BLUR_HPP
 
 #include "DocumentScanner/preprocessing/IPreprocessingStage.hpp"
 
