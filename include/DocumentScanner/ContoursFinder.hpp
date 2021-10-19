@@ -28,7 +28,7 @@ namespace ds
          * @brief Method finds contours on edge exposed image and writes
          * it to the output vector
          *
-         * @param input image with exposed edges
+         * @param input 8-bit single chanell image
          * @param output vector of vectors containing Points
          */
         void findContours(const cv::Mat& input,

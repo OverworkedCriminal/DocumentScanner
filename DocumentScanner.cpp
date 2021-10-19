@@ -6,13 +6,16 @@
 namespace ds
 {
     DocumentScanner::DocumentScanner(
+        const std::vector<std::shared_ptr<IPreprocessingStage>>& preprocessingStages,
         const std::shared_ptr<ContoursFinder>& contoursFinder,
         const std::shared_ptr<ICornersFinder>& cornersFinder)
     {
         assert(contoursFinder != nullptr);
         assert(cornersFinder != nullptr);
-        _contoursFinder = contoursFinder;
-        _cornersFinder = cornersFinder;
+
+        setProcessingStages(preprocessingStages);
+        setContoursFinder(contoursFinder);
+        setCornersFinder(cornersFinder);
     }
 
     
@@ -21,7 +24,7 @@ namespace ds
     {
         _buffers[0] = input;
         for (std::size_t i{ 0 }; i < _processingStages.size(); ++i)
-            _processingStages[i].process(_buffers[i], _buffers[i + 1]);
+            _processingStages[i]->process(_buffers[i], _buffers[i + 1]);
 
         _contoursFinder->findContours(_buffers.back(), _contours);
         _cornersFinder->findCorners(_contours, _corners);
@@ -34,6 +37,25 @@ namespace ds
         };
         
         cv::Mat transform{ cv::getPerspectiveTransform(_corners, warpedCorners) };
-        cv::warpPerspective(_buffers.back(), output, transform, outputSize);
+        cv::warpPerspective(input, output, transform, outputSize);
+    }
+
+    void DocumentScanner::setProcessingStages(
+        const std::vector<std::shared_ptr<IPreprocessingStage>>& stages)
+    {
+        _processingStages = stages;
+        _buffers.resize(_processingStages.size() + 1);
+    }
+
+    void DocumentScanner::setContoursFinder(
+        const std::shared_ptr<ContoursFinder>& finder)
+    {
+        _contoursFinder = finder;
+    }
+
+    void DocumentScanner::setCornersFinder(
+        const std::shared_ptr<ICornersFinder>& finder)
+    {
+        _cornersFinder = finder;
     }
 }

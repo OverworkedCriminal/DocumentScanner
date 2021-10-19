@@ -19,7 +19,7 @@ namespace ds
     {
     private:
 
-        std::vector<IPreprocessingStage> _processingStages;
+        std::vector<std::shared_ptr<IPreprocessingStage>> _processingStages;
 
         /**
          * vector of buffers.
@@ -39,12 +39,15 @@ namespace ds
 
         /**
          * @brief 
-         * 
+         *
+         * @param preprocessingStages 
          * @param contoursFinder it cannot be a nullptr
          * @param cornersFinder it cannot be a nullptr
          */
-        DocumentScanner(const std::shared_ptr<ContoursFinder>& contoursFinder,
-                        const std::shared_ptr<ICornersFinder>& cornersFinder);
+        DocumentScanner(
+            const std::vector<std::shared_ptr<IPreprocessingStage>>& preprocessingStages,
+            const std::shared_ptr<ContoursFinder>& contoursFinder,
+            const std::shared_ptr<ICornersFinder>& cornersFinder);
 
 
         /**
@@ -55,7 +58,14 @@ namespace ds
          * @param output 
          */
         void scan(const cv::Mat& input, cv::Mat& output, const cv::Size& outputSize);
-    };    
+
+        void setProcessingStages(
+            const std::vector<std::shared_ptr<IPreprocessingStage>>& stages);
+
+        inline void setContoursFinder(const std::shared_ptr<ContoursFinder>& finder);
+
+        inline void setCornersFinder(const std::shared_ptr<ICornersFinder>& finder);
+    };
 }
 
 
