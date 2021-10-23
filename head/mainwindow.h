@@ -17,5 +17,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+
+private slots:
+    void browseFiles(bool);
+
+private:
+
+    /**
+     * @brief Helper method. Connects each singal to slot
+     */
+    void connectSignals();
 };
 #endif // MAINWINDOW_H
