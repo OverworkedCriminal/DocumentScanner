@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1026</width>
+    <height>1218</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QWidget" name="warpedImage" native="true">
+     <widget class="ImageCV" name="warpedImage" native="true">
       <property name="minimumSize">
        <size>
         <width>600</width>
@@ -181,7 +181,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="originalImage" native="true">
+       <widget class="ImageCV" name="originalImage" native="true">
         <property name="minimumSize">
          <size>
           <width>300</width>
@@ -195,6 +195,14 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ImageCV</class>
+   <extends>QWidget</extends>
+   <header location="global">head/imagecv.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

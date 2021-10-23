@@ -12,10 +12,12 @@ INCLUDEPATH += \
     head/
 
 SOURCES += \
+    src/imagecv.cpp \
     src/main.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
+    head/imagecv.h \
     head/mainwindow.h
 
 FORMS += \
@@ -38,3 +40,10 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/lib/Documen
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/lib/DocumentScanner/build/release/documentscanner.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/lib/DocumentScanner/build/debug/documentscanner.lib
 else:unix: PRE_TARGETDEPS += $$PWD/lib/DocumentScanner/build/libdocumentscanner.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/lib/release/ -lopencv_core -lopencv_imgproc -lopencv_imgcodecs
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/lib/debug/ -lopencv_core -lopencv_imgproc -lopencv_imgcodecs
+else:unix: LIBS += -L$$PWD/../../../../usr/lib/ -lopencv_core -lopencv_imgproc -lopencv_imgcodecs
+
+INCLUDEPATH += $$PWD/../../../../usr/include/opencv4
+DEPENDPATH += $$PWD/../../../../usr/include/opencv4
