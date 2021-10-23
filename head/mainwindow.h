@@ -20,7 +20,20 @@ private:
 
 
 private slots:
+
+    /**
+     * @brief Slot is called whenever browseButton is pressed.
+     * It shows QFileDialog and saves selected file path
+     * in QLineEdit.
+     */
     void browseFiles(bool);
+
+    /**
+     * @brief Slot is called whenever text in QLineEdit changes.
+     * It reads new image and displays it on originalImage widget.
+     * @param filePath path to the new image
+     */
+    void imageFileChanged(const QString& filePath);
 
 private:
 
