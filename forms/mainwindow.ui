@@ -84,22 +84,8 @@
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="contoursfindingSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="contoursfindingLabel">
-              <property name="text">
-               <string>Contours finding</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="contoursfindingRETRCombobox"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="contoursfindingAPPROXCombobox"/>
-            </item>
-           </layout>
+          <widget class="ContoursfindingSettings" name="contoursfindingSettings" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_3"/>
           </widget>
          </item>
          <item>
@@ -134,6 +120,12 @@
    <class>ProcessingSettings</class>
    <extends>QWidget</extends>
    <header>head/processingsettings.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ContoursfindingSettings</class>
+   <extends>QWidget</extends>
+   <header>head/contoursfindingsettings.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

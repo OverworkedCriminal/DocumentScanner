@@ -41,5 +41,11 @@ private:
      * @brief Helper method. Connects each singal to slot
      */
     void connectSignals();
+
+    /**
+     * @brief Helper method. Sets text on each ProcessingSettings
+     * and fill their comboboxes
+     */
+    void fillProcessingSettings();
 };
 #endif // MAINWINDOW_H

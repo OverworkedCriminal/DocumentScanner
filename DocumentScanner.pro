@@ -12,17 +12,20 @@ INCLUDEPATH += \
     head/
 
 SOURCES += \
+    src/contoursfindingsettings.cpp \
     src/processingsettings.cpp \
     src/imagecv.cpp \
     src/main.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
+    head/contoursfindingsettings.h \
     head/imagecv.h \
     head/mainwindow.h \
     head/processingsettings.h
 
 FORMS += \
+    forms/contoursfindingsettings.ui \
     forms/mainwindow.ui \
     forms/processingsettings.ui
 
