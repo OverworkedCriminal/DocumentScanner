@@ -12,16 +12,19 @@ INCLUDEPATH += \
     head/
 
 SOURCES += \
+    src/processingsettings.cpp \
     src/imagecv.cpp \
     src/main.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
     head/imagecv.h \
-    head/mainwindow.h
+    head/mainwindow.h \
+    head/processingsettings.h
 
 FORMS += \
-    forms/mainwindow.ui
+    forms/mainwindow.ui \
+    forms/processingsettings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
