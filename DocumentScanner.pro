@@ -16,13 +16,24 @@ SOURCES += \
     src/processingsettings.cpp \
     src/imagecv.cpp \
     src/main.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/preprocessing/cannyfactory.cpp \
+    src/preprocessing/dilationfactory.cpp \
+    src/preprocessing/gaussianblurfactory.cpp \
+    src/preprocessing/nonefactory.cpp \
+    src/preprocessing/thresholdfactory.cpp
 
 HEADERS += \
     head/contoursfindingsettings.h \
     head/imagecv.h \
     head/mainwindow.h \
-    head/processingsettings.h
+    head/processingsettings.h \
+    head/preprocessing/cannyfactory.h \
+    head/preprocessing/dilationfactory.h \
+    head/preprocessing/gaussianblurfactory.h \
+    head/preprocessing/nonefactory.h \
+    head/preprocessing/preprocessingstagefactory.h \
+    head/preprocessing/thresholdfactory.h
 
 FORMS += \
     forms/contoursfindingsettings.ui \
