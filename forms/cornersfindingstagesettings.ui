@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProcessingSettings</class>
- <widget class="QWidget" name="ProcessingSettings">
+ <class>CornersfindingStageSettings</class>
+ <widget class="QWidget" name="CornersfindingStageSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>PLACEHOLDER</string>
+      <string>Corners finding</string>
      </property>
     </widget>
    </item>

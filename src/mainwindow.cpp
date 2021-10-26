@@ -4,6 +4,15 @@
 #include <QFileDialog>
 #include <opencv2/imgcodecs.hpp>
 
+#include <preprocessing/cannyfactory.h>
+#include <preprocessing/dilationfactory.h>
+#include <preprocessing/gaussianblurfactory.h>
+#include <preprocessing/nonefactory.h>
+#include <preprocessing/thresholdfactory.h>
+
+#include <corners_finding/minmaxxyfactory.h>
+#include <corners_finding/sumsubxyfactory.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -43,29 +52,36 @@ void MainWindow::connectSignals()
 
 void MainWindow::fillProcessingSettings()
 {
+    auto noneFactory{ std::make_shared<NoneFactory>() };
+
     auto& threshold{ ui->thresholdSettings };
     threshold->setText("Threshold");
-    threshold->add("None", {}, {});
-    threshold->add("Binary", {"t"}, {60.0});
+    threshold->add("None", {}, {}, noneFactory);
+    threshold->add("Binary", {"t"}, {60.0},
+                   std::make_shared<ThresholdFactory>());
 
     auto& blur{ ui->blurSettings };
     blur->setText("Blur");
-    blur->add("None", {}, {});
+    blur->add("None", {}, {}, noneFactory);
     blur->add("Gaussian", {"ksize X", "ksize Y", "sigma X", "sigma Y"},
-                          {        3,         3,         0,         0});
+                          {        3,         3,         0,         0},
+                          std::make_shared<GaussianblurFactory>());
 
     auto& edges{ ui->edgedetectionSettings };
     edges->setText("Edge detection");
-    edges->add("Canny", {"t1", "t2"}, {50.0, 220.0});
+    edges->add("Canny", {"t1", "t2"}, {50.0, 220.0},
+               std::make_shared<CannyFactory>());
 
     auto& dilation{ ui->dilationSettings };
     dilation->setText("Dilation");
-    dilation->add("None", {}, {});
-    dilation->add("Simple", {"ksize X", "ksize Y"}, {3, 3});
+    dilation->add("None", {}, {}, noneFactory);
+    dilation->add("Simple", {"ksize X", "ksize Y"}, {3, 3},
+                  std::make_shared<DilationFactory>());
 
     auto& corners{ ui->cornersfindingSettings };
-    corners->setText("Corners finding");
-    corners->add("Min Max XY", {}, {});
-    corners->add("Min Max Sum/Sub XY", {}, {});
+    corners->add("Min Max XY", {}, {},
+                 std::make_shared<MinMaxXYFactory>());
+    corners->add("Min Max Sum/Sub XY", {}, {},
+                 std::make_shared<SumSubXYFactory>());
 }
 

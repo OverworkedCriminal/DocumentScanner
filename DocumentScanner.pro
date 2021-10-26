@@ -12,8 +12,11 @@ INCLUDEPATH += \
     head/
 
 SOURCES += \
-    src/contoursfindingsettings.cpp \
-    src/processingsettings.cpp \
+    src/contours_finding/contoursfindingfactory.cpp \
+    src/corners_finding/minmaxxyfactory.cpp \
+    src/corners_finding/sumsubxyfactory.cpp \
+    src/cornersfindingstagesettings.cpp \
+    src/contoursfindingstagesettings.cpp \
     src/imagecv.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
@@ -21,24 +24,33 @@ SOURCES += \
     src/preprocessing/dilationfactory.cpp \
     src/preprocessing/gaussianblurfactory.cpp \
     src/preprocessing/nonefactory.cpp \
-    src/preprocessing/thresholdfactory.cpp
+    src/preprocessing/thresholdfactory.cpp \
+    src/preprocessingstagesettings.cpp \
+    src/shared_by_stages.cpp
 
 HEADERS += \
-    head/contoursfindingsettings.h \
+    head/contours_finding/contoursfindingfactory.h \
+    head/corners_finding/cornersfindingstagefactory.h \
+    head/corners_finding/minmaxxyfactory.h \
+    head/corners_finding/sumsubxyfactory.h \
+    head/cornersfindingstagesettings.h \
+    head/contoursfindingstagesettings.h \
     head/imagecv.h \
     head/mainwindow.h \
-    head/processingsettings.h \
     head/preprocessing/cannyfactory.h \
     head/preprocessing/dilationfactory.h \
     head/preprocessing/gaussianblurfactory.h \
     head/preprocessing/nonefactory.h \
     head/preprocessing/preprocessingstagefactory.h \
-    head/preprocessing/thresholdfactory.h
+    head/preprocessing/thresholdfactory.h \
+    head/preprocessingstagesettings.h \
+    head/shared_by_stages.h
 
 FORMS += \
-    forms/contoursfindingsettings.ui \
+    forms/cornersfindingstagesettings.ui \
+    forms/contoursfindingstagesettings.ui \
     forms/mainwindow.ui \
-    forms/processingsettings.ui
+    forms/preprocessingstagesettings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

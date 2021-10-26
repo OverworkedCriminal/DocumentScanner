@@ -1,11 +1,11 @@
-#include "contoursfindingsettings.h"
-#include "ui_contoursfindingsettings.h"
+#include "contoursfindingstagesettings.h"
+#include "ui_contoursfindingstagesettings.h"
 
 #include <opencv2/imgproc.hpp>
 
-ContoursfindingSettings::ContoursfindingSettings(QWidget *parent) :
+ContoursfindingStageSettings::ContoursfindingStageSettings(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ContoursfindingSettings)
+    ui(new Ui::ContoursfindingStageSettings)
 {
     ui->setupUi(this);
     _values.resize(2);
@@ -26,18 +26,18 @@ ContoursfindingSettings::ContoursfindingSettings(QWidget *parent) :
     methods->addItem("TC89 KCOS"); // 4
 
     connect(modes, &QComboBox::currentIndexChanged,
-            this, [this](int index) {
-                this->_values[0] = index;
-                emit this->valuesChanged(_values);
-            });
+        this, [this](int index) {
+            this->_values[0] = index;
+            emit this->valuesChanged(_factory.create(_values));
+        });
     connect(methods, &QComboBox::currentIndexChanged,
-            this, [this](int index) {
-                this->_values[1] = index + 1;
-                emit this->valuesChanged(_values);
-            });
+        this, [this](int index) {
+            this->_values[1] = index + 1;
+            emit this->valuesChanged(_factory.create(_values));
+        });
 }
 
-ContoursfindingSettings::~ContoursfindingSettings()
+ContoursfindingStageSettings::~ContoursfindingStageSettings()
 {
     delete ui;
 }

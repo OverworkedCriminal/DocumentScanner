@@ -1,26 +1,23 @@
-#ifndef PROCESSINGSETTINGS_H
-#define PROCESSINGSETTINGS_H
+#ifndef CORNERSFINDINGSTAGESETTINGS_H
+#define CORNERSFINDINGSTAGESETTINGS_H
 
 #include <QWidget>
+#include "corners_finding/cornersfindingstagefactory.h"
+
 #include <vector>
+#include <memory>
 
 namespace Ui {
-class ProcessingSettings;
+class CornersfindingStageSettings;
 }
 
-class ProcessingSettings : public QWidget
+class CornersfindingStageSettings : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ProcessingSettings(QWidget *parent = nullptr);
-    ~ProcessingSettings();
-
-    /**
-     * @brief Sets text in QLabel on the left side of the widget
-     * @param value value to be set
-     */
-    void setText(const QString& value);
+    explicit CornersfindingStageSettings(QWidget *parent = nullptr);
+    ~CornersfindingStageSettings();
 
     /**
      * @brief Adds new value to combobox
@@ -29,10 +26,12 @@ public:
      * processing object (needs to be the same size as paramsValues)
      * @param paramsValues default values used to create
      * processing object (needs to be the same size as paramsNames)
+     * @param factory factory object that creates wanted object
      */
     void add(QString&& name,
              std::vector<QString>&& paramsNames,
-             std::vector<double>&& paramsValues);
+             std::vector<double>&& paramsValues,
+             std::shared_ptr<CornersfindingStageFactory> factory);
 
 private slots:
 
@@ -42,30 +41,22 @@ private slots:
      */
     void comboboxIndexChanged(int index);
 
-    /**
-     * @brief Slot is called whenever value in QLineEdit changes.
-     * @param oldValue addres of value to be replaced
-     * @param value QString to be cast to double
-     */
-    void inputChanged(double* oldValue, const QString& value);
-
-
 signals:
 
     /**
      * @brief Signal is emitted when:
      * 1. combobox value changed
      * 2. value in QLineEdit changed
-     * @param index current index in combobox
-     * @param values current values in QLineEdit
+     * @param obj newly created CornerFinder that
+     * should replace old one.
      */
-    void valuesChanged(int index, const std::vector<double>& values);
-
+    void valuesChanged(std::shared_ptr<ds::ICornersFinder> obj);
 
 private:
-    Ui::ProcessingSettings *ui;
+    Ui::CornersfindingStageSettings *ui;
     std::vector<std::vector<QString>> _paramsNames;
     std::vector<std::vector<double>> _paramsValues;
+    std::vector<std::shared_ptr<CornersfindingStageFactory>> _factories;
 };
 
-#endif // PROCESSINGSETTINGS_H
+#endif // CORNERSFINDINGSTAGESETTINGS_H

@@ -64,32 +64,22 @@
           </layout>
          </item>
          <item>
-          <widget class="ProcessingSettings" name="thresholdSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_7"/>
-          </widget>
+          <widget class="PreprocessingStageSettings" name="thresholdSettings" native="true"/>
          </item>
          <item>
-          <widget class="ProcessingSettings" name="blurSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_6"/>
-          </widget>
+          <widget class="PreprocessingStageSettings" name="blurSettings" native="true"/>
          </item>
          <item>
-          <widget class="ProcessingSettings" name="edgedetectionSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-          </widget>
+          <widget class="PreprocessingStageSettings" name="edgedetectionSettings" native="true"/>
          </item>
          <item>
-          <widget class="ProcessingSettings" name="dilationSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-          </widget>
+          <widget class="PreprocessingStageSettings" name="dilationSettings" native="true"/>
          </item>
          <item>
-          <widget class="ContoursfindingSettings" name="contoursfindingSettings" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_3"/>
-          </widget>
+          <widget class="ContoursfindingStageSettings" name="contoursfindingSettings" native="true"/>
          </item>
          <item>
-          <widget class="ProcessingSettings" name="cornersfindingSettings" native="true"/>
+          <widget class="CornersfindingStageSettings" name="cornersfindingSettings" native="true"/>
          </item>
         </layout>
        </widget>
@@ -117,15 +107,21 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ProcessingSettings</class>
+   <class>ContoursfindingStageSettings</class>
    <extends>QWidget</extends>
-   <header>head/processingsettings.h</header>
+   <header>head/contoursfindingstagesettings.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ContoursfindingSettings</class>
+   <class>PreprocessingStageSettings</class>
    <extends>QWidget</extends>
-   <header>head/contoursfindingsettings.h</header>
+   <header>head/preprocessingstagesettings.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CornersfindingStageSettings</class>
+   <extends>QWidget</extends>
+   <header>head/cornersfindingstagesettings.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
