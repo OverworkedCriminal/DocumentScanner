@@ -17,7 +17,9 @@ ContoursfindingStageSettings::ContoursfindingStageSettings(QWidget *parent) :
     modes->addItem("LIST");      // 1
     modes->addItem("CCOMP");     // 2
     modes->addItem("TREE");      // 3
-    modes->addItem("FLOODFILL"); // 4
+
+    // (does not work with 8 bit 1C images)
+    // modes->addItem("FLOODFILL"); // 4
 
     auto& methods{ ui->methodCombobox };
     methods->addItem("NONE");      // 1

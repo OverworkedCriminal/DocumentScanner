@@ -18,13 +18,25 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    int w{ ui->warpedImage->width() };
+    int h{ ui->warpedImage->height() };
+    _warpedSize = cv::Size(w, h);
+
+    _preprocessing.resize(4);
     connectSignals();
+    _scanner = new ds::DocumentScanner(
+                _preprocessing,
+                ContoursfindingFactory().create({0.0, 1.0}),
+                MinMaxXYFactory().create({}));
     fillProcessingSettings();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete _scanner;
 }
 
 void MainWindow::browseFiles(bool)
@@ -36,9 +48,12 @@ void MainWindow::browseFiles(bool)
 
 void MainWindow::imageFileChanged(const QString &filePath)
 {
-    cv::Mat img{ cv::imread(filePath.toStdString()) };
-    if (!img.empty())
-        ui->originalImage->show(img);
+    _img = cv::imread(filePath.toStdString());
+    if (!_img.empty())
+    {
+        ui->originalImage->show(_img);
+        displayWarpedImage();
+    }
 }
 
 void MainWindow::connectSignals()
@@ -48,6 +63,40 @@ void MainWindow::connectSignals()
 
     connect(ui->imagePathInput, &QLineEdit::textChanged,
             this, &MainWindow::imageFileChanged);
+
+    // preprocessing
+
+    connect(ui->thresholdSettings,
+            &PreprocessingStageSettings::valuesChanged,
+            this,
+            [this](auto stage) { preprocessingChanged(0, stage); });
+
+    connect(ui->blurSettings,
+            &PreprocessingStageSettings::valuesChanged,
+            this,
+            [this](auto stage) { preprocessingChanged(1, stage); });
+
+    connect(ui->edgedetectionSettings,
+            &PreprocessingStageSettings::valuesChanged,
+            this,
+            [this](auto stage) { preprocessingChanged(2, stage); });
+
+    connect(ui->dilationSettings,
+            &PreprocessingStageSettings::valuesChanged,
+            this,
+            [this](auto stage) { preprocessingChanged(3, stage); });
+
+    // contours finding
+    connect(ui->contoursfindingSettings,
+            &ContoursfindingStageSettings::valuesChanged,
+            this,
+            &MainWindow::contoursfinderChanged);
+
+    // corners finding
+    connect(ui->cornersfindingSettings,
+            &CornersfindingStageSettings::valuesChanged,
+            this,
+            &MainWindow::cornersfinderChanged);
 }
 
 void MainWindow::fillProcessingSettings()
@@ -83,5 +132,36 @@ void MainWindow::fillProcessingSettings()
                  std::make_shared<MinMaxXYFactory>());
     corners->add("Min Max Sum/Sub XY", {}, {},
                  std::make_shared<SumSubXYFactory>());
+}
+
+void MainWindow::displayWarpedImage()
+{
+    if (_img.empty()) return;
+
+    _scanner->scan(_img, _warped, _warpedSize);
+    ui->warpedImage->show(_warped);
+}
+
+void MainWindow::preprocessingChanged(
+        std::size_t index,
+        std::shared_ptr<ds::IPreprocessingStage> stage)
+{
+    _preprocessing[index] = stage;
+    _scanner->setProcessingStages(_preprocessing);
+    displayWarpedImage();
+}
+
+void MainWindow::contoursfinderChanged(
+        std::shared_ptr<ds::ContoursFinder> stage)
+{
+    _scanner->setContoursFinder(stage);
+    displayWarpedImage();
+}
+
+void MainWindow::cornersfinderChanged(
+        std::shared_ptr<ds::ICornersFinder> stage)
+{
+    _scanner->setCornersFinder(stage);
+    displayWarpedImage();
 }
 

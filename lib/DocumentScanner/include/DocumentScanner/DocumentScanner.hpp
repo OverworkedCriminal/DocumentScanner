@@ -62,9 +62,9 @@ namespace ds
         void setProcessingStages(
             const std::vector<std::shared_ptr<IPreprocessingStage>>& stages);
 
-        inline void setContoursFinder(const std::shared_ptr<ContoursFinder>& finder);
+        void setContoursFinder(const std::shared_ptr<ContoursFinder>& finder);
 
-        inline void setCornersFinder(const std::shared_ptr<ICornersFinder>& finder);
+        void setCornersFinder(const std::shared_ptr<ICornersFinder>& finder);
     };
 }
 
