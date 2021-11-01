@@ -3,6 +3,8 @@
 
 #include <QLayout>
 
+const extern int STAGE_ARG_INPUT_WIDTH;
+
 /**
  * @brief Removes each element from layout and frees memory
  * @param layout layout to be cleared

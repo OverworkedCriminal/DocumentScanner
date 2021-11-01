@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
                 ContoursfindingFactory().create({0.0, 1.0}),
                 MinMaxXYFactory().create({}));
     fillProcessingSettings();
-
+    setWindowTitle("DocumentScanner");
 }
 
 MainWindow::~MainWindow()
@@ -112,8 +112,8 @@ void MainWindow::fillProcessingSettings()
     auto& blur{ ui->blurSettings };
     blur->setText("Blur");
     blur->add("None", {}, {}, noneFactory);
-    blur->add("Gaussian", {"ksize X", "ksize Y", "sigma X", "sigma Y"},
-                          {        3,         3,         0,         0},
+    blur->add("Gaussian", {"cols", "rows", "σ X", "σ Y"},
+                          {     3,      3,     0,     0},
                           std::make_shared<GaussianblurFactory>());
 
     auto& edges{ ui->edgedetectionSettings };
@@ -124,7 +124,7 @@ void MainWindow::fillProcessingSettings()
     auto& dilation{ ui->dilationSettings };
     dilation->setText("Dilation");
     dilation->add("None", {}, {}, noneFactory);
-    dilation->add("Simple", {"ksize X", "ksize Y"}, {3, 3},
+    dilation->add("Simple", {"cols", "rows"}, {3, 3},
                   std::make_shared<DilationFactory>());
 
     auto& corners{ ui->cornersfindingSettings };

@@ -2,6 +2,8 @@
 
 #include <QWidget>
 
+const int STAGE_ARG_INPUT_WIDTH{ 40 };
+
 void clearLayout(QLayout* layout)
 {
     QLayoutItem* child;

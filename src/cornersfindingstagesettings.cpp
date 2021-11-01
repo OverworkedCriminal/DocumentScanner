@@ -24,7 +24,9 @@ void CornersfindingStageSettings::add(QString &&name, std::vector<QString> &&par
     _paramsNames.emplace_back(paramsNames);
     _paramsValues.emplace_back(paramsValues);
     _factories.emplace_back(factory);
-    ui->combobox->addItem(name);
+    auto& c{ ui->combobox };
+    c->addItem(name);
+    c->setItemData(c->count() - 1, Qt::AlignCenter, Qt::TextAlignmentRole);
 }
 
 void CornersfindingStageSettings::comboboxIndexChanged(int index)
@@ -37,9 +39,19 @@ void CornersfindingStageSettings::comboboxIndexChanged(int index)
 
     for (std::size_t i{ 0 }; i < names.size(); ++i)
     {
-        layout->addWidget(new QLabel(names[i], this), 0, i);
-
+        auto label{ new QLabel(names[i], this) };
         auto lineEdit{ new QLineEdit(QString::number(values[i]), this) };
+        label->setAlignment(Qt::AlignCenter);
+
+        label->setMinimumWidth(STAGE_ARG_INPUT_WIDTH);
+        label->setMaximumWidth(STAGE_ARG_INPUT_WIDTH);
+        lineEdit->setMinimumWidth(STAGE_ARG_INPUT_WIDTH);
+        lineEdit->setMaximumWidth(STAGE_ARG_INPUT_WIDTH);
+
+        lineEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+
+        layout->addWidget(label, 0, i);
         layout->addWidget(lineEdit, 1, i);
 
         connect(lineEdit, &QLineEdit::textChanged, this,
