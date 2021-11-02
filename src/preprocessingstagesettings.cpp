@@ -50,6 +50,7 @@ void PreprocessingStageSettings::comboboxIndexChanged(int index)
         auto label{ new QLabel(names[i], this) };
         auto lineEdit{ new QLineEdit(QString::number(values[i]), this) };
         label->setAlignment(Qt::AlignCenter);
+        lineEdit->setAlignment(Qt::AlignCenter);
 
         label->setMinimumWidth(STAGE_ARG_INPUT_WIDTH);
         label->setMaximumWidth(STAGE_ARG_INPUT_WIDTH);

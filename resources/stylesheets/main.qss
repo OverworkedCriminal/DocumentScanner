@@ -1,0 +1,44 @@
+QMainWindow {
+    background: rgb(50, 50, 50);
+}
+
+QFrame#rightFrame {
+    background: rgb(70, 70, 70);
+    border: 1px solid rgb(140, 140, 140);
+}
+
+QLabel {
+    color: rgb(150, 150, 150);
+}
+
+QLineEdit {
+    color: rgb(170, 170, 170);
+    background: rgb(80, 80, 80);
+    selection-background-color: rgb(212, 121, 1);
+}
+
+QPushButton {
+    color: rgb(150, 150, 150);
+    background: rgb(80, 80, 80);
+    border: 1px solid rgb(55, 55, 55);
+    padding: 2px 10px;
+}
+QPushButton:hover {
+    background: rgb(65, 65, 65);
+}
+QPushButton:pressed {
+    background: rgb(55, 55, 55);
+}
+
+QComboBox {
+    color: rgb(170, 170, 170);
+    background: rgb(80, 80, 80);
+}
+QComboBox::item {
+    color: rgb(170, 170, 170);
+    background: rgb(80, 80, 80);
+}
+QComboBox::item:selected {
+    color: rgb(170, 170, 170);
+    background: rgb(65, 65, 65);
+}

@@ -76,3 +76,6 @@ else:unix: LIBS += -L$$PWD/../../../../usr/lib/ -lopencv_core -lopencv_imgproc -
 
 INCLUDEPATH += $$PWD/../../../../usr/include/opencv4
 DEPENDPATH += $$PWD/../../../../usr/include/opencv4
+
+RESOURCES += \
+    resources/resources.qrc
